@@ -2,10 +2,13 @@ package personal.alex.caloriecounter
 
 import android.app.DatePickerDialog
 import android.content.ContentValues
+import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import org.eazegraph.lib.models.PieModel
 import java.util.*
+
 
 class MainActivity : AppCompatActivity() {
         var displayMonth = 0
@@ -22,14 +25,20 @@ class MainActivity : AppCompatActivity() {
 
         //Set Date Related stuff
         val c = Calendar.getInstance()
-        setDisplayDate(c.get(Calendar.MONTH),c.get(Calendar.DAY_OF_MONTH),c.get(Calendar.YEAR))
+        setDisplayDate(c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH), c.get(Calendar.YEAR))
         setDailyMetric(dbHelper.getTodayMetrics(parseDate(getDate())))
 
         GoToCalendarBtn.setOnClickListener{
-            val dpd = DatePickerDialog(this, DatePickerDialog.OnDateSetListener { _, pickYear, pickMonth, pickDay ->
-                setDisplayDate(pickMonth, pickDay, pickYear)
-                setDailyMetric(dbHelper.getTodayMetrics(parseDate(getDate())))
-            }, displayYear, displayMonth, displayDay)
+            val dpd = DatePickerDialog(
+                this,
+                DatePickerDialog.OnDateSetListener { _, pickYear, pickMonth, pickDay ->
+                    setDisplayDate(pickMonth, pickDay, pickYear)
+                    setDailyMetric(dbHelper.getTodayMetrics(parseDate(getDate())))
+                },
+                displayYear,
+                displayMonth,
+                displayDay
+            )
 
             dpd.show()
         }
@@ -42,21 +51,40 @@ class MainActivity : AppCompatActivity() {
 
 
         SaveInputBtn.setOnClickListener {
-            val input = CaloricMeasurement(CalorieInput.text.toString().toInt(), CarbInput.text.toString().toInt(), FatInput.text.toString().toInt(), ProteinInput.text.toString().toInt());
+            val input = CaloricMeasurement(
+                CalorieInput.text.toString().toInt(),
+                CarbInput.text.toString().toInt(),
+                FatInput.text.toString().toInt(),
+                ProteinInput.text.toString().toInt()
+            );
 
             val values = ContentValues().apply {
-                put(DatabaseRepo.CaloricMetricContract.MetricEntry.COLUMN_NAME_CALORIES, CalorieInput.text.toString().toInt())
-                put(DatabaseRepo.CaloricMetricContract.MetricEntry.COLUMN_NAME_CARBS, CarbInput.text.toString().toInt())
-                put(DatabaseRepo.CaloricMetricContract.MetricEntry.COLUMN_NAME_FATS, FatInput.text.toString().toInt())
-                put(DatabaseRepo.CaloricMetricContract.MetricEntry.COLUMN_NAME_PROTEINS, ProteinInput.text.toString().toInt())
-                put(DatabaseRepo.CaloricMetricContract.MetricEntry.COLUMN_NAME_DATE, parseDate(getDate()))
+                put(
+                    DatabaseRepo.CaloricMetricContract.MetricEntry.COLUMN_NAME_CALORIES,
+                    CalorieInput.text.toString().toInt()
+                )
+                put(
+                    DatabaseRepo.CaloricMetricContract.MetricEntry.COLUMN_NAME_CARBS,
+                    CarbInput.text.toString().toInt()
+                )
+                put(
+                    DatabaseRepo.CaloricMetricContract.MetricEntry.COLUMN_NAME_FATS,
+                    FatInput.text.toString().toInt()
+                )
+                put(
+                    DatabaseRepo.CaloricMetricContract.MetricEntry.COLUMN_NAME_PROTEINS,
+                    ProteinInput.text.toString().toInt()
+                )
+                put(
+                    DatabaseRepo.CaloricMetricContract.MetricEntry.COLUMN_NAME_DATE, parseDate(
+                        getDate()
+                    )
+                )
             }
 
             db?.insert(DatabaseRepo.CaloricMetricContract.MetricEntry.TABLE_NAME, null, values)
             setDailyMetric(dbHelper.getTodayMetrics(parseDate(getDate())))
         }
-
-
 
 
         /* BARCODE SCANNER STUFF
@@ -79,10 +107,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun parseDate(date: String) : String
     {
-        return "${date.replace("/","")}"
+        return "${date.replace("/", "")}"
     }
 
-    private fun setDisplayDate(month : Int, day: Int, year : Int)
+    private fun setDisplayDate(month: Int, day: Int, year: Int)
     {
         displayMonth = month
         displayDay = day
@@ -90,20 +118,57 @@ class MainActivity : AppCompatActivity() {
         SelectedDateTV.text = "${monthConverter(month)}/$day/$year"
     }
 
-    private fun setDailyMetric(dailyMetric : CaloricMeasurement?)
+    private fun setDailyMetric(dailyMetric: CaloricMeasurement?)
     {
         if (dailyMetric != null) {
-            DailyMetricTV.text = "Calories: ${dailyMetric.Calories}, Carbs: ${dailyMetric.Carbs}, Fats ${dailyMetric.Fats}, Protein ${dailyMetric.Protein}"
+            DailyMetricCaloriesTV.text = "Calories: ${dailyMetric.Calories}"
+            DailyMetricCarbsTV.text = "Carbs: ${dailyMetric.Carbs}"
+            DailyMetricFatsTV.text = "Fats ${dailyMetric.Fats}"
+            DailyMetricProteinsTV.text = "Protein ${dailyMetric.Protein}"
+            setData(dailyMetric)
         }
         else
         {
-            DailyMetricTV.text = "Calories: 0, Carbs: 0, Fats 0, Protein 0"
+            DailyMetricCaloriesTV.text = "Calories: 0"
+            DailyMetricCarbsTV.text = "Carbs: 0"
+            DailyMetricFatsTV.text = "Fats: 0"
+            DailyMetricProteinsTV.text = "Protein 0"
+
+            metric_pie_chart.clearChart()
+            metric_pie_chart.startAnimation()
         }
     }
 
-    private fun monthConverter(month : Int) : Int
+    private fun monthConverter(month: Int) : Int
     {
         return month + 1
+    }
+
+
+    private fun setData(dailyMetric: CaloricMeasurement) {
+        metric_pie_chart.clearChart()
+
+        metric_pie_chart.addPieSlice(
+            PieModel(
+                "Carbs", dailyMetric.Carbs.toFloat(),
+                Color.parseColor("#66BB6A")
+            )
+        )
+        metric_pie_chart.addPieSlice(
+            PieModel(
+                "Fats", dailyMetric.Fats.toFloat(),
+                Color.parseColor("#FFA726")
+            )
+        )
+        metric_pie_chart.addPieSlice(
+            PieModel(
+                "Protein", dailyMetric.Protein.toFloat(),
+                Color.parseColor("#EF5350")
+            )
+        )
+
+        // To animate the pie chart
+        metric_pie_chart.startAnimation()
     }
 
     /* BARCODE SCANNER STUFF

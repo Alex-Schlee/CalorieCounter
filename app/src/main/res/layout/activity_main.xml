@@ -112,21 +112,26 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+    <ImageButton
         android:id="@+id/GoToCalendarBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="300dp"
+        android:background="#FFFFFF"
+        android:src="@android:drawable/ic_menu_my_calendar"
         android:text="Button"
         app:layout_constraintBottom_toTopOf="@+id/CalorieInput"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/toolbar"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@android:drawable/ic_menu_my_calendar"
+        tools:srcCompat="@android:drawable/ic_menu_my_calendar" />
 
     <TextView
         android:id="@+id/SelectedDateTV"
         android:layout_width="303dp"
         android:layout_height="46dp"
+        android:gravity="center"
         android:text="TextView"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="@+id/toolbar"
@@ -135,79 +140,157 @@
         app:layout_constraintStart_toStartOf="@+id/toolbar"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@color/color_white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <!-- ProgressBar that represents a total of 100% -->
-        <ProgressBar
-            android:id="@+id/progressbar_carbs"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="300dp"
-            android:layout_height="300dp"
-            android:indeterminate="false"
-            android:max="100"
-            android:progress="100"
-            android:progressDrawable="@drawable/metric_donut_carb"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <!-- ProgressBar that represents a chart slice, where "android:progress" is the % value of the slice -->
-        <ProgressBar
-        android:id="@+id/progressbar_fats"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:indeterminate="false"
-        android:max="100"
-        android:progress="80"
-        android:progressDrawable="@drawable/metric_donut_fat"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/SaveInputBtn"
+        tools:context=".MainActivity">>
 
-        <ProgressBar
-            android:id="@+id/progressbar_protein"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="300dp"
-            android:layout_height="300dp"
-            android:indeterminate="false"
-            android:max="100"
-            android:progress="45"
-            android:progressDrawable="@drawable/metric_donut_protein"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <!-- The text that goes in a center of the chart -->
-        <TextView
-            android:id="@+id/DailyMetricTV"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="1500/2000"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <!-- Card view for displaying the -->
+        <!-- Pie chart and details of pie chart -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardViewGraph"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="15dp"
+            android:elevation="10dp"
+            app:cardCornerRadius="10dp">
 
 
-    <!-- Doughnut chart ends here -->
+            <!--Linear layout to display pie chart -->
+            <!-- and details of pie chart-->
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <!--Pie chart to display the data-->
+
+                <org.eazegraph.lib.charts.PieChart xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/metric_pie_chart"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:layout_weight="1"
+                    android:padding="6dp"
+
+                    />
+
+                <!--Creating another linear layout -->
+                <!-- to display pie chart details -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="20dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:layout_gravity="center_vertical">
+
+                        <!--View to display the yellow color icon-->
+
+                        <!--Text view to display Calories -->
+                        <TextView
+                            android:id="@+id/DailyMetricCaloriesTV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="5dp"
+                            android:text="Calories"
+                            android:textSize="18sp" />
+
+                    </LinearLayout>
+
+                    <!--Linear layout to display carbs-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="15dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginTop="5dp">
+
+                        <!--View to display the green color icon-->
+                        <View
+                            android:layout_width="15dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/Carbs" />
+
+                        <!--Text view to display carbs text -->
+                        <TextView
+                            android:id="@+id/DailyMetricCarbsTV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="10dp"
+                            android:text="Carbs" />
+
+                    </LinearLayout>
+
+                    <!--Linear layout to display Fats-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="15dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginTop="5dp">
+
+                        <!--View to display the red color icon-->
+                        <View
+                            android:layout_width="15dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/Fats" />
+
+                        <!--Text view to display Fats text -->
+                        <TextView
+                            android:id="@+id/DailyMetricFatsTV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="10dp"
+                            android:text="Fats" />
+
+                    </LinearLayout>
+
+                    <!--Linear layout to display Protein-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="15dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginTop="5dp">
+
+                        <!--View to display the red color icon-->
+                        <View
+                            android:layout_width="15dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/Protein" />
+
+                        <!--Text view to display Protein text -->
+                        <TextView
+                            android:id="@+id/DailyMetricProteinsTV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="10dp"
+                            android:text="Protein" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </RelativeLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
