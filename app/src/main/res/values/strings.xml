@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">CalorieCounter</string>
+    <string name="usdaURL">https://api.nal.usda.gov/fdc/v1/foods/search?api_key=</string>
+    <string name="usdaKey">jvelmOeuEjRxUfLdYcZDCmjEljo1vyTLZBSlhNKo</string>
 </resources>

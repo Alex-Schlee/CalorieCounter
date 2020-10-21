@@ -96,10 +96,10 @@
         android:text="Save"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.91"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.44" />
+        app:layout_constraintVertical_bias="0.458" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -141,6 +141,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <RelativeLayout
+        android:id="@+id/relativeLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/color_white"
@@ -291,6 +292,17 @@
         </androidx.cardview.widget.CardView>
 
     </RelativeLayout>
+
+    <TextView
+        android:id="@+id/APITextView"
+        android:layout_width="223dp"
+        android:layout_height="140dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/relativeLayout"
+        app:layout_constraintEnd_toStartOf="@+id/SaveInputBtn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ProteinIdTV"
+        app:layout_constraintVertical_bias="0.517" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

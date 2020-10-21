@@ -87,6 +87,7 @@ class MainActivity : AppCompatActivity() {
         }
 
 
+
         /* BARCODE SCANNER STUFF
         BarCodeScanBtn.setOnClickListener {
             val intentIntegrator = IntentIntegrator(this@MainActivity)
