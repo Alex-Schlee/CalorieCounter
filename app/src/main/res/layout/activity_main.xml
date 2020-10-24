@@ -7,148 +7,53 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <EditText
-        android:id="@+id/ProteinInput"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="number"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/FatInput" />
-
-    <TextView
-        android:id="@+id/CalorieIdTV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="63dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="@+id/CalorieInput"
-        app:layout_constraintEnd_toStartOf="@+id/CalorieInput"
-        app:layout_constraintHorizontal_bias="0.888"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.74" />
-
-    <TextView
-        android:id="@+id/CarbIdTV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="@+id/CarbInput"
-        app:layout_constraintEnd_toStartOf="@+id/CarbInput"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/FatIdTV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:layout_marginBottom="1dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="@+id/FatInput"
-        app:layout_constraintEnd_toStartOf="@+id/FatInput"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/CarbIdTV" />
-
-    <TextView
-        android:id="@+id/ProteinIdTV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="@+id/ProteinInput"
-        app:layout_constraintEnd_toStartOf="@+id/ProteinInput"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/FatIdTV" />
-
-    <EditText
-        android:id="@+id/CalorieInput"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="number"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
-
-    <EditText
-        android:id="@+id/CarbInput"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="number"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/CalorieInput" />
-
-    <EditText
-        android:id="@+id/FatInput"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="number"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/CarbInput" />
-
-    <Button
-        android:id="@+id/SaveInputBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Save"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.91"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.458" />
-
-    <androidx.appcompat.widget.Toolbar
+    <RelativeLayout
         android:id="@+id/toolbar"
-        android:layout_width="409dp"
-        android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:background="@color/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <ImageButton
-        android:id="@+id/GoToCalendarBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="300dp"
-        android:background="#FFFFFF"
-        android:src="@android:drawable/ic_menu_my_calendar"
-        android:text="Button"
-        app:layout_constraintBottom_toTopOf="@+id/CalorieInput"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/toolbar"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:src="@android:drawable/ic_menu_my_calendar"
-        tools:srcCompat="@android:drawable/ic_menu_my_calendar" />
+        <TextView
+            android:id="@+id/SelectedDateTV"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            android:fontFamily="@font/boogaloo"
+            android:gravity="center"
+            android:text="TextView"
+            android:textAlignment="center"
+            android:textColor="@color/color_white"
+            android:textSize="36sp" />
 
-    <TextView
-        android:id="@+id/SelectedDateTV"
-        android:layout_width="303dp"
-        android:layout_height="46dp"
-        android:gravity="center"
-        android:text="TextView"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
-        app:layout_constraintEnd_toStartOf="@+id/GoToCalendarBtn"
-        app:layout_constraintHorizontal_bias="0.511"
-        app:layout_constraintStart_toStartOf="@+id/toolbar"
-        app:layout_constraintTop_toTopOf="parent" />
+        <ImageButton
+            android:id="@+id/GoToCalendarBtn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="5dp"
+            android:layout_marginTop="5dp"
+            android:background="@color/zxing_transparent"
+            android:src="@drawable/ic_calendar"
+            android:text="Button" />
+
+    </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:background="@color/color_white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/SaveInputBtn"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
         tools:context=".MainActivity">>
 
         <!-- Card view for displaying the -->
@@ -156,7 +61,7 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/cardViewGraph"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="match_parent"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="15dp"
             android:layout_marginRight="20dp"
@@ -171,121 +76,283 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:weightSum="2">
 
                 <!--Pie chart to display the data-->
 
-                <org.eazegraph.lib.charts.PieChart xmlns:app="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/metric_pie_chart"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginBottom="15dp"
-                    android:layout_weight="1"
-                    android:padding="6dp"
-
-                    />
 
                 <!--Creating another linear layout -->
                 <!-- to display pie chart details -->
                 <LinearLayout
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
                     android:orientation="vertical">
 
-                    <LinearLayout
+                    <!--Linear layout to display carbs-->
+                    <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="25dp"
+                        android:layout_height="50dp"
                         android:layout_gravity="center_vertical">
 
                         <!--View to display the yellow color icon-->
 
                         <!--Text view to display Calories -->
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/CaloriesTV"
+                            android:layout_width="92dp"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/boogaloo"
+                            android:gravity="center_vertical|right"
+                            android:text="Calories: "
+                            android:textSize="24dp" />
+
                         <TextView
                             android:id="@+id/DailyMetricCaloriesTV"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:paddingLeft="5dp"
-                            android:text="Calories"
-                            android:textSize="18sp" />
+                            android:layout_width="@dimen/DailyMetricTVWidth"
+                            android:layout_height="match_parent"
+                            android:layout_toRightOf="@id/CaloriesTV"
+                            android:fontFamily="@font/boogaloo"
+                            android:gravity="center_vertical"
+                            android:text="0"
+                            android:textSize="24dp" />
 
-                    </LinearLayout>
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="75dp"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentRight="true"
+                            android:hint="Calories"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            app:boxStrokeColor="@color/colorPrimary"
+                            >
 
-                    <!--Linear layout to display carbs-->
-                    <LinearLayout
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/CalorieInput"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_alignParentRight="true"
+                                android:fontFamily="@font/boogaloo"
+                                android:inputType="number"
+                                android:textSize="18dp"/>
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="15dp"
+                        android:layout_height="40dp"
                         android:layout_gravity="center_vertical"
                         android:layout_marginTop="5dp">
 
                         <!--View to display the green color icon-->
                         <View
-                            android:layout_width="15dp"
-                            android:layout_height="match_parent"
+                            android:id="@+id/carbView"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_marginTop="7.5dp"
                             android:background="@color/Carbs" />
 
                         <!--Text view to display carbs text -->
+
+                        <TextView
+                            android:id="@+id/CarbsTV"
+                            android:layout_width="@dimen/SetMetricTVWidth"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="1dp"
+                            android:layout_toRightOf="@id/carbView"
+                            android:fontFamily="@font/boogaloo"
+                            android:gravity="center_vertical|right"
+                            android:paddingLeft="10dp"
+                            android:text="Carbs: "
+                            android:textSize="18dp" />
+
                         <TextView
                             android:id="@+id/DailyMetricCarbsTV"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:paddingLeft="10dp"
-                            android:text="Carbs" />
+                            android:layout_width="@dimen/DailyMetricTVWidth"
+                            android:layout_height="match_parent"
+                            android:layout_toRightOf="@id/CarbsTV"
+                            android:fontFamily="@font/boogaloo"
+                            android:gravity="center_vertical"
+                            android:text="0"
+                            android:textSize="18dp" />
 
-                    </LinearLayout>
+
+
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="75dp"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentRight="true"
+                            android:hint="Carbs"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            app:boxStrokeColor="@color/colorPrimary"
+                            >
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/CarbInput"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_alignParentRight="true"
+                                android:fontFamily="@font/boogaloo"
+                                android:inputType="number"
+                                android:textSize="18dp" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                    </RelativeLayout>
 
                     <!--Linear layout to display Fats-->
-                    <LinearLayout
+                    <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="15dp"
+                        android:layout_height="40dp"
                         android:layout_gravity="center_vertical"
                         android:layout_marginTop="5dp">
 
                         <!--View to display the red color icon-->
                         <View
-                            android:layout_width="15dp"
-                            android:layout_height="match_parent"
+                            android:id="@+id/fatView"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+
+                            android:layout_marginTop="7.5dp"
                             android:background="@color/Fats" />
 
                         <!--Text view to display Fats text -->
                         <TextView
-                            android:id="@+id/DailyMetricFatsTV"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:id="@+id/FatsTV"
+                            android:layout_width="@dimen/SetMetricTVWidth"
+                            android:layout_height="match_parent"
+                            android:layout_toRightOf="@id/fatView"
+                            android:fontFamily="@font/boogaloo"
+                            android:gravity="center_vertical|right"
                             android:paddingLeft="10dp"
-                            android:text="Fats" />
+                            android:text="Fats: "
+                            android:textSize="18dp" />
 
-                    </LinearLayout>
+                        <TextView
+                            android:id="@+id/DailyMetricFatsTV"
+                            android:layout_width="@dimen/DailyMetricTVWidth"
+                            android:layout_height="match_parent"
+                            android:layout_toRightOf="@id/FatsTV"
+                            android:fontFamily="@font/boogaloo"
+                            android:gravity="center_vertical"
+                            android:text="0"
+                            android:textSize="18dp" />
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="75dp"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentRight="true"
+                            android:hint="Fats"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            app:boxStrokeColor="@color/colorPrimary"
+                            >
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/FatInput"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_alignParentRight="true"
+                                android:fontFamily="@font/boogaloo"
+                                android:inputType="number"
+                                android:textSize="18dp" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                    </RelativeLayout>
 
                     <!--Linear layout to display Protein-->
-                    <LinearLayout
+                    <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="15dp"
+                        android:layout_height="40dp"
                         android:layout_gravity="center_vertical"
                         android:layout_marginTop="5dp">
 
                         <!--View to display the red color icon-->
                         <View
-                            android:layout_width="15dp"
-                            android:layout_height="match_parent"
+                            android:id="@+id/proteinView"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_marginTop="7.5dp"
                             android:background="@color/Protein" />
 
                         <!--Text view to display Protein text -->
                         <TextView
-                            android:id="@+id/DailyMetricProteinsTV"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:id="@+id/ProteinsTV"
+                            android:layout_width="@dimen/SetMetricTVWidth"
+                            android:layout_height="match_parent"
+                            android:layout_toRightOf="@id/proteinView"
+                            android:fontFamily="@font/boogaloo"
+                            android:gravity="center_vertical|right"
                             android:paddingLeft="10dp"
-                            android:text="Protein" />
+                            android:text="Protein: "
+                            android:textSize="18dp" />
 
-                    </LinearLayout>
+                        <TextView
+                            android:id="@+id/DailyMetricProteinsTV"
+                            android:layout_width="@dimen/DailyMetricTVWidth"
+                            android:layout_height="match_parent"
+                            android:layout_toRightOf="@id/ProteinsTV"
+                            android:fontFamily="@font/boogaloo"
+                            android:gravity="center_vertical"
+                            android:text="0"
+                            android:textSize="18dp" />
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="75dp"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentRight="true"
+                            android:hint="Protein"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            app:boxStrokeColor="@color/colorPrimary"
+                            >
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/ProteinInput"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_alignParentRight="true"
+                                android:fontFamily="@font/boogaloo"
+                                android:inputType="number"
+                                android:textSize="18dp" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                    </RelativeLayout>
 
                 </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <org.eazegraph.lib.charts.PieChart
+                        android:id="@+id/metric_pie_chart"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:padding="6dp" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center">
+
+                        <ImageButton
+                            android:id="@+id/SaveInputBtn"
+                            android:background="@android:color/transparent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_plus_circle"
+                            />
+
+                    </RelativeLayout>
+
+
+
+                </RelativeLayout>
 
             </LinearLayout>
 
@@ -293,16 +360,8 @@
 
     </RelativeLayout>
 
-    <TextView
-        android:id="@+id/APITextView"
-        android:layout_width="223dp"
-        android:layout_height="140dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/relativeLayout"
-        app:layout_constraintEnd_toStartOf="@+id/SaveInputBtn"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ProteinIdTV"
-        app:layout_constraintVertical_bias="0.517" />
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

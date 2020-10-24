@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="DailyMetricTVWidth">65dp</dimen>
+    <dimen name="SetMetricTVWidth">65dp</dimen>
+</resources>

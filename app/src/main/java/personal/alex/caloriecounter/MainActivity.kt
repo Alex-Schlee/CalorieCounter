@@ -44,36 +44,30 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-        CalorieIdTV.text = "Calories: "
-        CarbIdTV.text = "Carbs: "
-        FatIdTV.text = "Fats: "
-        ProteinIdTV.text = "Protein: "
-
-
         SaveInputBtn.setOnClickListener {
             val input = CaloricMeasurement(
-                CalorieInput.text.toString().toInt(),
-                CarbInput.text.toString().toInt(),
-                FatInput.text.toString().toInt(),
-                ProteinInput.text.toString().toInt()
+                checkEmpty(CalorieInput.text.toString()),
+                checkEmpty(CarbInput.text.toString()),
+                checkEmpty(FatInput.text.toString()),
+                checkEmpty(ProteinInput.text.toString())
             );
 
             val values = ContentValues().apply {
                 put(
                     DatabaseRepo.CaloricMetricContract.MetricEntry.COLUMN_NAME_CALORIES,
-                    CalorieInput.text.toString().toInt()
+                    input.Calories
                 )
                 put(
                     DatabaseRepo.CaloricMetricContract.MetricEntry.COLUMN_NAME_CARBS,
-                    CarbInput.text.toString().toInt()
+                    input.Carbs
                 )
                 put(
                     DatabaseRepo.CaloricMetricContract.MetricEntry.COLUMN_NAME_FATS,
-                    FatInput.text.toString().toInt()
+                    input.Fats
                 )
                 put(
                     DatabaseRepo.CaloricMetricContract.MetricEntry.COLUMN_NAME_PROTEINS,
-                    ProteinInput.text.toString().toInt()
+                    input.Protein
                 )
                 put(
                     DatabaseRepo.CaloricMetricContract.MetricEntry.COLUMN_NAME_DATE, parseDate(
@@ -84,20 +78,26 @@ class MainActivity : AppCompatActivity() {
 
             db?.insert(DatabaseRepo.CaloricMetricContract.MetricEntry.TABLE_NAME, null, values)
             setDailyMetric(dbHelper.getTodayMetrics(parseDate(getDate())))
+            resetInputs()
         }
 
+    }
 
+    private fun resetInputs()
+    {
+        CalorieInput.text?.clear()
+        CarbInput.text?.clear()
+        FatInput.text?.clear()
+        ProteinInput.text?.clear()
+    }
 
-        /* BARCODE SCANNER STUFF
-        BarCodeScanBtn.setOnClickListener {
-            val intentIntegrator = IntentIntegrator(this@MainActivity)
-            intentIntegrator.setBeepEnabled(false)
-            intentIntegrator.setCameraId(0)
-            intentIntegrator.setPrompt("SCAN")
-            intentIntegrator.setBarcodeImageEnabled(false)
-            intentIntegrator.initiateScan()
+    private fun checkEmpty(value: String) : Int
+    {
+        return if(value == "") {
+            0
+        } else {
+            value.toInt()
         }
-        */
     }
 
 
@@ -122,10 +122,10 @@ class MainActivity : AppCompatActivity() {
     private fun setDailyMetric(dailyMetric: CaloricMeasurement?)
     {
         if (dailyMetric != null) {
-            DailyMetricCaloriesTV.text = "Calories: ${dailyMetric.Calories}"
-            DailyMetricCarbsTV.text = "Carbs: ${dailyMetric.Carbs}"
-            DailyMetricFatsTV.text = "Fats ${dailyMetric.Fats}"
-            DailyMetricProteinsTV.text = "Protein ${dailyMetric.Protein}"
+            DailyMetricCaloriesTV.text = numberFormatter(dailyMetric.Calories)
+            DailyMetricCarbsTV.text = numberFormatter(dailyMetric.Carbs)
+            DailyMetricFatsTV.text = numberFormatter(dailyMetric.Fats)
+            DailyMetricProteinsTV.text = numberFormatter(dailyMetric.Protein)
             setData(dailyMetric)
         }
         else
@@ -136,8 +136,12 @@ class MainActivity : AppCompatActivity() {
             DailyMetricProteinsTV.text = "Protein 0"
 
             metric_pie_chart.clearChart()
-            metric_pie_chart.startAnimation()
         }
+    }
+
+    private fun numberFormatter(number: Int) : String
+    {
+        return "%,d".format(number)
     }
 
     private fun monthConverter(month: Int) : Int
@@ -171,27 +175,4 @@ class MainActivity : AppCompatActivity() {
         // To animate the pie chart
         metric_pie_chart.startAnimation()
     }
-
-    /* BARCODE SCANNER STUFF
-    override fun onActivityResult(
-        requestCode: Int,
-        resultCode: Int,
-        data: Intent?
-    ) {
-        val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
-        if (result != null) {
-            if (result.contents == null) {
-                Toast.makeText(this, "cancelled", Toast.LENGTH_SHORT).show()
-            } else {
-                Log.d("MainActivity", "Scanned")
-                Toast.makeText(this, "Scanned -> " + result.contents, Toast.LENGTH_SHORT)
-                    .show()
-            }
-        } else {
-            super.onActivityResult(requestCode, resultCode, data)
-        }
-    }
-    */
-
-
 }
