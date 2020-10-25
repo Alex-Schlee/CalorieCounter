@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="DailyMetricTVWidth">65dp</dimen>
-    <dimen name="SetMetricTVWidth">65dp</dimen>
+    <dimen name="DailyMetricPercentTVWidth">40dp</dimen>
+    <dimen name="SetMetricTVWidth">150dp</dimen>
+    <dimen name="CalorieTVWidth">150dp</dimen>
+    <dimen name="inputTextSize">14sp</dimen>
+    <dimen name="percentTextSize">14sp</dimen>
+    <dimen name="percentMarginLeft">5dp</dimen>
 </resources>

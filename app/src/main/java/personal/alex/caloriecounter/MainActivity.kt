@@ -1,5 +1,6 @@
 package personal.alex.caloriecounter
 
+import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.content.ContentValues
 import android.graphics.Color
@@ -7,13 +8,14 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import org.eazegraph.lib.models.PieModel
+import java.text.DecimalFormat
 import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
-        var displayMonth = 0
-        var displayDay = 0
-        var displayYear = 0
+        private var displayMonth = 0
+        private var displayDay = 0
+        private var displayYear = 0
         //Database stuff
 
         override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         GoToCalendarBtn.setOnClickListener{
             val dpd = DatePickerDialog(
                 this,
-                DatePickerDialog.OnDateSetListener { _, pickYear, pickMonth, pickDay ->
+                { _, pickYear, pickMonth, pickDay ->
                     setDisplayDate(pickMonth, pickDay, pickYear)
                     setDailyMetric(dbHelper.getTodayMetrics(parseDate(getDate())))
                 },
@@ -50,7 +52,7 @@ class MainActivity : AppCompatActivity() {
                 checkEmpty(CarbInput.text.toString()),
                 checkEmpty(FatInput.text.toString()),
                 checkEmpty(ProteinInput.text.toString())
-            );
+            )
 
             val values = ContentValues().apply {
                 put(
@@ -108,9 +110,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun parseDate(date: String) : String
     {
-        return "${date.replace("/", "")}"
+        return date.replace("/", "")
     }
 
+    @SuppressLint("SetTextI18n")
     private fun setDisplayDate(month: Int, day: Int, year: Int)
     {
         displayMonth = month
@@ -121,19 +124,22 @@ class MainActivity : AppCompatActivity() {
 
     private fun setDailyMetric(dailyMetric: CaloricMeasurement?)
     {
+
         if (dailyMetric != null) {
-            DailyMetricCaloriesTV.text = numberFormatter(dailyMetric.Calories)
-            DailyMetricCarbsTV.text = numberFormatter(dailyMetric.Carbs)
-            DailyMetricFatsTV.text = numberFormatter(dailyMetric.Fats)
-            DailyMetricProteinsTV.text = numberFormatter(dailyMetric.Protein)
+            val total = dailyMetric.Carbs + dailyMetric.Fats + dailyMetric.Protein
+
+            CalorieInputLayout.hint = numberFormatter(dailyMetric.Calories)
+            CarbInputLayout.hint = numberFormatter(dailyMetric.Carbs) + "g - " + percentFormatter((dailyMetric.Carbs.toDouble()/total))
+            FatInputLayout.hint = numberFormatter(dailyMetric.Fats) + "g - " + percentFormatter((dailyMetric.Fats.toDouble()/total))
+            ProteinInputLayout.hint = numberFormatter(dailyMetric.Protein) + "g - " + percentFormatter((dailyMetric.Protein.toDouble()/total))
             setData(dailyMetric)
         }
         else
         {
-            DailyMetricCaloriesTV.text = "Calories: 0"
-            DailyMetricCarbsTV.text = "Carbs: 0"
-            DailyMetricFatsTV.text = "Fats: 0"
-            DailyMetricProteinsTV.text = "Protein 0"
+            CalorieInputLayout.hint = "0"
+            CarbInputLayout.hint = "0"
+            FatInputLayout.hint = "0"
+            ProteinInputLayout.hint = "0"
 
             metric_pie_chart.clearChart()
         }
@@ -142,6 +148,11 @@ class MainActivity : AppCompatActivity() {
     private fun numberFormatter(number: Int) : String
     {
         return "%,d".format(number)
+    }
+
+    private fun percentFormatter(number: Double) : String
+    {
+        return DecimalFormat("##.#%").format(number).toString()
     }
 
     private fun monthConverter(month: Int) : Int

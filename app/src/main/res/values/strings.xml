@@ -2,4 +2,11 @@
     <string name="app_name">CalorieCounter</string>
     <string name="usdaURL">https://api.nal.usda.gov/fdc/v1/foods/search?api_key=</string>
     <string name="usdaKey">jvelmOeuEjRxUfLdYcZDCmjEljo1vyTLZBSlhNKo</string>
+    <string name="currentDate">mm/dd/yyyy</string>
+    <string name="date_selection_button">Date Selection Button</string>
+    <string name="calories">Calories</string>
+    <string name="carbs">Carbs</string>
+    <string name="fats">Fats</string>
+    <string name="protein">Protein</string>
+    <string name="add_metrics">Add Metrics</string>
 </resources>

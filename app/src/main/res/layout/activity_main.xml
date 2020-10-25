@@ -16,31 +16,42 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginStart="20dp"
+            app:cardCornerRadius="15dp"
+            tools:ignore="RelativeOverlap">
+
         <TextView
             android:id="@+id/SelectedDateTV"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
-            android:layout_marginStart="25dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginStart="5dp"
             android:layout_marginEnd="5dp"
-            android:layout_marginBottom="5dp"
             android:fontFamily="@font/boogaloo"
             android:gravity="center"
-            android:text="TextView"
+            android:text="@string/currentDate"
             android:textAlignment="center"
-            android:textColor="@color/color_white"
+            android:textColor="@color/colorPrimary"
             android:textSize="36sp" />
+
+        </androidx.cardview.widget.CardView>
+
 
         <ImageButton
             android:id="@+id/GoToCalendarBtn"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_alignParentEnd="true"
-            android:layout_marginEnd="5dp"
+            android:layout_marginEnd="20dp"
             android:layout_marginTop="5dp"
             android:background="@color/zxing_transparent"
             android:src="@drawable/ic_calendar"
-            android:text="Button" />
+            android:contentDescription="@string/date_selection_button" />
 
     </RelativeLayout>
 
@@ -54,14 +65,14 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        tools:context=".MainActivity">>
+        tools:context=".MainActivity">
 
         <!-- Card view for displaying the -->
         <!-- Pie chart and details of pie chart -->
         <androidx.cardview.widget.CardView
             android:id="@+id/cardViewGraph"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="15dp"
             android:layout_marginRight="20dp"
@@ -75,9 +86,10 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:weightSum="2">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:baselineAligned="false">
 
                 <!--Pie chart to display the data-->
 
@@ -86,9 +98,10 @@
                 <!-- to display pie chart details -->
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
                     android:orientation="vertical">
@@ -102,30 +115,22 @@
                         <!--View to display the yellow color icon-->
 
                         <!--Text view to display Calories -->
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/CaloriesTV"
-                            android:layout_width="92dp"
-                            android:layout_height="match_parent"
-                            android:fontFamily="@font/boogaloo"
-                            android:gravity="center_vertical|right"
-                            android:text="Calories: "
-                            android:textSize="24dp" />
 
-                        <TextView
-                            android:id="@+id/DailyMetricCaloriesTV"
-                            android:layout_width="@dimen/DailyMetricTVWidth"
-                            android:layout_height="match_parent"
-                            android:layout_toRightOf="@id/CaloriesTV"
-                            android:fontFamily="@font/boogaloo"
-                            android:gravity="center_vertical"
-                            android:text="0"
-                            android:textSize="24dp" />
+                        <ImageView
+                            android:id="@+id/calorieView"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_marginTop="7.5dp"
+                            android:src="@drawable/ic_calories"
+                            android:contentDescription="@string/calories" />
 
                         <com.google.android.material.textfield.TextInputLayout
-                            android:layout_width="75dp"
+                            android:layout_width="@dimen/CalorieTVWidth"
                             android:layout_height="match_parent"
-                            android:layout_alignParentRight="true"
-                            android:hint="Calories"
+                            android:id="@+id/CalorieInputLayout"
+                            android:layout_toEndOf="@id/calorieView"
+                            android:layout_marginStart="5dp"
+                            android:hint="@string/calories"
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             app:boxStrokeColor="@color/colorPrimary"
                             >
@@ -134,11 +139,12 @@
                                 android:id="@+id/CalorieInput"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:layout_alignParentRight="true"
+                                android:layout_alignParentEnd="true"
                                 android:fontFamily="@font/boogaloo"
                                 android:inputType="number"
-                                android:textSize="18dp"/>
+                                android:textSize="24sp"/>
                         </com.google.android.material.textfield.TextInputLayout>
+
 
                     </RelativeLayout>
 
@@ -149,45 +155,24 @@
                         android:layout_marginTop="5dp">
 
                         <!--View to display the green color icon-->
-                        <View
+                        <ImageView
                             android:id="@+id/carbView"
                             android:layout_width="25dp"
                             android:layout_height="25dp"
                             android:layout_marginTop="7.5dp"
-                            android:background="@color/Carbs" />
+                            android:layout_marginStart="15dp"
+                            android:src="@drawable/ic_carbohydrates"
+                            android:contentDescription="@string/carbs" />
 
                         <!--Text view to display carbs text -->
 
-                        <TextView
-                            android:id="@+id/CarbsTV"
+                        <com.google.android.material.textfield.TextInputLayout
                             android:layout_width="@dimen/SetMetricTVWidth"
                             android:layout_height="match_parent"
-                            android:layout_marginLeft="1dp"
-                            android:layout_toRightOf="@id/carbView"
-                            android:fontFamily="@font/boogaloo"
-                            android:gravity="center_vertical|right"
-                            android:paddingLeft="10dp"
-                            android:text="Carbs: "
-                            android:textSize="18dp" />
-
-                        <TextView
-                            android:id="@+id/DailyMetricCarbsTV"
-                            android:layout_width="@dimen/DailyMetricTVWidth"
-                            android:layout_height="match_parent"
-                            android:layout_toRightOf="@id/CarbsTV"
-                            android:fontFamily="@font/boogaloo"
-                            android:gravity="center_vertical"
-                            android:text="0"
-                            android:textSize="18dp" />
-
-
-
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:layout_width="75dp"
-                            android:layout_height="match_parent"
-                            android:layout_alignParentRight="true"
-                            android:hint="Carbs"
+                            android:id="@+id/CarbInputLayout"
+                            android:layout_marginStart="5dp"
+                            android:layout_toEndOf="@id/carbView"
+                            android:hint="@string/carbs"
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             app:boxStrokeColor="@color/colorPrimary"
                             >
@@ -196,11 +181,12 @@
                                 android:id="@+id/CarbInput"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:layout_alignParentRight="true"
+                                android:layout_alignParentEnd="true"
                                 android:fontFamily="@font/boogaloo"
                                 android:inputType="number"
-                                android:textSize="18dp" />
+                                android:textSize="@dimen/inputTextSize" />
                         </com.google.android.material.textfield.TextInputLayout>
+
 
                     </RelativeLayout>
 
@@ -212,41 +198,27 @@
                         android:layout_marginTop="5dp">
 
                         <!--View to display the red color icon-->
-                        <View
+                        <ImageView
                             android:id="@+id/fatView"
                             android:layout_width="25dp"
                             android:layout_height="25dp"
-
                             android:layout_marginTop="7.5dp"
-                            android:background="@color/Fats" />
+                            android:layout_marginStart="15dp"
+                            android:src="@drawable/ic_fat"
+                            android:contentDescription="@string/fats" />
 
                         <!--Text view to display Fats text -->
-                        <TextView
-                            android:id="@+id/FatsTV"
-                            android:layout_width="@dimen/SetMetricTVWidth"
-                            android:layout_height="match_parent"
-                            android:layout_toRightOf="@id/fatView"
-                            android:fontFamily="@font/boogaloo"
-                            android:gravity="center_vertical|right"
-                            android:paddingLeft="10dp"
-                            android:text="Fats: "
-                            android:textSize="18dp" />
 
-                        <TextView
-                            android:id="@+id/DailyMetricFatsTV"
-                            android:layout_width="@dimen/DailyMetricTVWidth"
-                            android:layout_height="match_parent"
-                            android:layout_toRightOf="@id/FatsTV"
-                            android:fontFamily="@font/boogaloo"
-                            android:gravity="center_vertical"
-                            android:text="0"
-                            android:textSize="18dp" />
 
                         <com.google.android.material.textfield.TextInputLayout
-                            android:layout_width="75dp"
+                            android:layout_width="@dimen/SetMetricTVWidth"
                             android:layout_height="match_parent"
-                            android:layout_alignParentRight="true"
-                            android:hint="Fats"
+                            android:id="@+id/FatInputLayout"
+                            android:layout_marginStart="5dp"
+                            android:layout_toEndOf="@id/fatView"
+                            android:fontFamily="@font/boogaloo"
+                            android:gravity="center_vertical|end"
+                            android:hint="@string/fats"
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             app:boxStrokeColor="@color/colorPrimary"
                             >
@@ -255,11 +227,12 @@
                                 android:id="@+id/FatInput"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:layout_alignParentRight="true"
+                                android:layout_alignParentEnd="true"
                                 android:fontFamily="@font/boogaloo"
                                 android:inputType="number"
-                                android:textSize="18dp" />
+                                android:textSize="@dimen/inputTextSize" />
                         </com.google.android.material.textfield.TextInputLayout>
+
 
                     </RelativeLayout>
 
@@ -271,40 +244,26 @@
                         android:layout_marginTop="5dp">
 
                         <!--View to display the red color icon-->
-                        <View
+                        <ImageView
                             android:id="@+id/proteinView"
                             android:layout_width="25dp"
                             android:layout_height="25dp"
                             android:layout_marginTop="7.5dp"
-                            android:background="@color/Protein" />
+                            android:layout_marginStart="15dp"
+                            android:src="@drawable/ic_protein"
+                            android:contentDescription="@string/protein" />
 
                         <!--Text view to display Protein text -->
-                        <TextView
-                            android:id="@+id/ProteinsTV"
-                            android:layout_width="@dimen/SetMetricTVWidth"
-                            android:layout_height="match_parent"
-                            android:layout_toRightOf="@id/proteinView"
-                            android:fontFamily="@font/boogaloo"
-                            android:gravity="center_vertical|right"
-                            android:paddingLeft="10dp"
-                            android:text="Protein: "
-                            android:textSize="18dp" />
-
-                        <TextView
-                            android:id="@+id/DailyMetricProteinsTV"
-                            android:layout_width="@dimen/DailyMetricTVWidth"
-                            android:layout_height="match_parent"
-                            android:layout_toRightOf="@id/ProteinsTV"
-                            android:fontFamily="@font/boogaloo"
-                            android:gravity="center_vertical"
-                            android:text="0"
-                            android:textSize="18dp" />
 
                         <com.google.android.material.textfield.TextInputLayout
-                            android:layout_width="75dp"
+                            android:layout_width="@dimen/SetMetricTVWidth"
                             android:layout_height="match_parent"
-                            android:layout_alignParentRight="true"
-                            android:hint="Protein"
+                            android:id="@+id/ProteinInputLayout"
+                            android:layout_marginStart="5dp"
+                            android:layout_toEndOf="@id/proteinView"
+                            android:fontFamily="@font/boogaloo"
+                            android:gravity="center_vertical|end"
+                            android:hint="@string/protein"
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             app:boxStrokeColor="@color/colorPrimary"
                             >
@@ -313,11 +272,12 @@
                                 android:id="@+id/ProteinInput"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:layout_alignParentRight="true"
+                                android:layout_alignParentEnd="true"
                                 android:fontFamily="@font/boogaloo"
                                 android:inputType="number"
-                                android:textSize="18dp" />
+                                android:textSize="@dimen/inputTextSize" />
                         </com.google.android.material.textfield.TextInputLayout>
+
 
                     </RelativeLayout>
 
@@ -326,14 +286,22 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginEnd="10dp"
                     android:layout_weight="1">
 
-                    <org.eazegraph.lib.charts.PieChart
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center">
+
+
+                <org.eazegraph.lib.charts.PieChart
                         android:id="@+id/metric_pie_chart"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:padding="6dp" />
+                        android:layout_width="125dp"
+                        android:layout_height="125dp"
+                    android:padding="6dp" />
+
+                </RelativeLayout>
 
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -346,7 +314,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:src="@drawable/ic_plus_circle"
-                            />
+                            android:contentDescription="@string/add_metrics" />
 
                     </RelativeLayout>
 
