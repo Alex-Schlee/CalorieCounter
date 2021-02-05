@@ -9,6 +9,8 @@ This reached a completed state and I decided to refactor it to MVVM with a Room 
 In its current state, the user can input a set about of Calories, Carbs, Proteins and Fats. The app will store that info for each day and display the totals. Nothing too crazy. 
 
 Things I Learned:
-  -UI design is difficult. Its easy to come up with an aesthetically pleasing design in your head but putting it in code is easier said than done. 
-  -"Ready, Fire, Aim" does not work well in software development. In this project I felt that I was made too many things up as I went along. Even having only a rough idea of how a
+
+  UI design is difficult. Its easy to come up with an aesthetically pleasing design in your head but putting it in code is easier said than done. 
+  
+  "Ready, Fire, Aim" does not work well in software development. In this project I felt that I was made too many things up as I went along. Even having only a rough idea of how a
     project should be structured and how the part fit together will save a lot of future headache.
